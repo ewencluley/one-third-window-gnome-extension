@@ -1,6 +1,6 @@
 .PHONY: build clean test-wayland follow-log
 
-ext_id := one-third-window@chmouel.com
+ext_id := wrecktangle@ewencluley.com
 zip = $(ext_id).zip
 schema = schemas/gschemas.compiled
 

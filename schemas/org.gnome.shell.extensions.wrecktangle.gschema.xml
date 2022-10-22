@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.wrecktangle" path="/org/gnome/shell/extensions/wrecktangle/">
+    <key name="left-third-shortcut" type="as">
+      <default><![CDATA[['<Super><Control>d']]]></default>
+      <summary>Left Third Shortcut Key</summary>
+    </key>
+    <key name="center-third-shortcut" type="as">
+      <default><![CDATA[['<Super><Control>f']]]></default>
+      <summary>Center Third Shortcut Key</summary>
+    </key>
+    <key name="right-third-shortcut" type="as">
+      <default><![CDATA[['<Super><Control>g']]]></default>
+      <summary>Right Third Shortcut Key</summary>
+    </key>
+
+    <key name="left-half-shortcut" type="as">
+      <default><![CDATA[['<Super><Control>leftarrow']]]></default>
+      <summary>Left Half Shortcut Key</summary>
+    </key>
+    <key name="right-half-shortcut" type="as">
+      <default><![CDATA[['<Super><Control>rightarrow']]]></default>
+      <summary>Right Half Shortcut Key</summary>
+    </key>
+
+    <key name="left-twothirds-shortcut" type="as">
+      <default><![CDATA[['<Super><Control>e']]]></default>
+      <summary>Left Two Thirds Shortcut Key</summary>
+    </key>
+    <key name="right-twothirds-shortcut" type="as">
+      <default><![CDATA[['<Super><Control>t']]]></default>
+      <summary>Right Two Thirds Shortcut Key</summary>
+    </key>
+    
+  </schema>
+</schemalist>

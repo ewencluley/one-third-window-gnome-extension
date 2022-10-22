@@ -5,8 +5,13 @@ const COLUMN_KEY = 0;
 const COLUMN_MODS = 1;
 
 const KEYBOARD_SHORTCUTS = [
-    {id: 'center-shortcut', desc: 'Center window'},
-    {id: 'rotate-shortcut', desc: 'Rotate window position'},
+    {id: 'left-third-shortcut', desc: 'Left Third'},
+    {id: 'center-third-shortcut', desc: 'Center Third'},
+    {id: 'right-third-shortcut', desc: 'Right Third'},
+    {id: 'left-half-shortcut', desc: 'Left Half'},
+    {id: 'right-half-shortcut', desc: 'Right Half'},
+    {id: 'left-twothirds-shortcut', desc: 'Left Two Thirds'},
+    {id: 'right-twothirds-shortcut', desc: 'Right Two Thirds'},
 ];
 
 function init() {}
@@ -24,43 +29,6 @@ function buildPrefsWidget() {
         row_spacing: 12,
         visible: true,
     });
-
-    const tileConfigLabel = new Gtk.Label({
-        label: '<b>Pixels ajustement</b>',
-        use_markup: true,
-        visible: true,
-    });
-    grid.attach(tileConfigLabel, 0, 0, 1, 1);
-
-    const boxers = new Gtk.Box({
-        orientation: Gtk.Orientation.VERTICAL,
-        spacing: 5,
-    });
-
-    boxers.prepend(
-        getSomePixels(
-            'How many pixels to enlarge the window with',
-            settings,
-            'enlarge-width'
-        )
-    );
-
-    boxers.append(
-        getSomePixels(
-            'How many pixels before we start placing the window (ie: larger panels)',
-            settings,
-            'top-start'
-        )
-    );
-
-    boxers.append(
-        getSomePixels(
-            'How many pixels to increase the window height with',
-            settings,
-            'height-increase'
-        )
-    );
-    grid.attach(boxers, 0, 1, 1, 1);
 
     const keyboardShortcutsLabel = new Gtk.Label({
         label: '<b>Keyboard shortcuts</b>',
