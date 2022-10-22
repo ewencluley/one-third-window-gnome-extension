@@ -5,15 +5,7 @@ const {Meta, Shell} = imports.gi;
 const Main = imports.ui.main;
 const ExtensionUtils = imports.misc.extensionUtils;
 
-var LEFT = 'LEFT';
-var RIGHT = 'RIGHT';
-var CENTER = 'CENTER';
-
 class Extension {
-    constructor() {
-        this._window = null;
-        this._previous = null;
-    }
 
     getActiveWindow() {
         return global.workspace_manager
@@ -24,70 +16,45 @@ class Extension {
 
     enable() {
         this._settings = ExtensionUtils.getSettings();
-        this.bindKey('center-shortcut', () => this.moveCenter());
-        this.bindKey('rotate-shortcut', () => this.moveAround());
+        this.bindKey('left-third-shortcut', () => this.move(3, 0));
+        this.bindKey('center-third-shortcut', () => this.move(3, 1));
+        this.bindKey('right-third-shortcut', () => this.move(3, 2));
+
+        this.bindKey('left-half-shortcut', () => this.move(2, 0));
+        this.bindKey('right-half-shortcut', () => this.move(2, 1));
+
+        this.bindKey('left-twothirds-shortcut', () => this.move(3, 0, 2));
+        this.bindKey('right-twothirds-shortcut', () => this.move(3, 1, 2));
     }
 
     disable() {
-        this.unbindKey('center-shortcut');
-        this.unbindKey('rotate-shortcut');
+        this.unbindKey('left-third-shortcut');
+        this.unbindKey('center-third-shortcut');
+        this.unbindKey('right-third-shortcut');
+        this.unbindKey('left-half-shortcut');
+        this.unbindKey('right-half-shortcut');
+        this.unbindKey('left-twothirds-shortcut');
+        this.unbindKey('right-twothirds-shortcut');
     }
 
-    moveCenter() {
-        this.moveByMode('center');
-        this._previous = CENTER;
-    }
-
-    moveAround() {
-        if (!this._previous || this._previous === LEFT)
-            return this.moveCenter();
-
-
-        if (this._previous === CENTER) {
-            this._previous = RIGHT;
-            return this.moveByMode(RIGHT);
-        }
-
-        if (this._previous === RIGHT) {
-            this._previous = LEFT;
-            return this.moveByMode(LEFT);
-        }
-        return null;
-    }
-
-    moveByMode(mode) {
-        const activeWindow = this.getActiveWindow();
-        if (!activeWindow) {
-            log('No active window');
+    move(division, position, widthMultiplier = 1) {
+        if (position > division) {
             return;
         }
+        const activeWindow = this.getActiveWindow();
         const monitor = activeWindow.get_monitor();
         const workarea = this.getWorkAreaForMonitor(monitor);
+        const width = workarea.width * (widthMultiplier / division);
+        const height = workarea.height;
+        const x = position * (workarea.width / division);
+        const y = workarea.y;
 
-        const rightMargin = 10;
-        const enlargeWidth = this._settings.get_int('enlarge-width');
-
-        const heightIncrease = this._settings.get_int('height-increase');
-        const topStart = this._settings.get_int('top-start');
-
-        const W = workarea.width / 2 - rightMargin + enlargeWidth;
-        // from the topbar #TODO:setting
-        const Y = topStart; // gnome default top bar is 25, dash to panel is 48
-        const H = workarea.height + heightIncrease;
-
-        // position from the left
-        let X = workarea.width / 3 - enlargeWidth;
-        if (mode === RIGHT)
-            X = workarea.width / 2 - rightMargin;
-        else if (mode === LEFT)
-            X = 0;
-
-
+        console.log("x:", x, "width:", width, "pos:", position, "division:", division, "widthMultiplier:", widthMultiplier)
         this.moveWindow(activeWindow, {
-            x: X,
-            y: Y,
-            width: W,
-            height: H,
+            x: x,
+            y: y,
+            width: width,
+            height: height,
         });
     }
 
