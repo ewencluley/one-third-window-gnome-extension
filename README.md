@@ -7,6 +7,8 @@ Position window like [Rectangle](https://rectangleapp.com/) in Gnome!
 Clone this repository with git and do a `make install` to install it 
 in your `~/.local/share/gnome-shell/extensions` directory.
 
+Then reload Gnome (`Alt` + `F2` then type `r` and hit `Enter`).
+
 ## Settings
 
 Shortcuts can be modified in the preferences. By default, they use the default Rectangle shortcuts
