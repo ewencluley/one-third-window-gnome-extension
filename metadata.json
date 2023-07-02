@@ -2,7 +2,7 @@
     "name": "Wrecktangle",
     "uuid": "wrecktangle@ewencluley.com",
     "description": "Rectangles window manager clone for Gnome",
-    "url": "https://github.com/ewencluley/wrecktangle-gnome-extension",
+    "url": "https://github.com/ewencluley/wrecktangle",
     "settings-schema": "org.gnome.shell.extensions.wrecktangle",
     "version": 1,
     "shell-version": [
@@ -12,6 +12,7 @@
         "40",
         "41",
         "42",
-        "43"
+        "43",
+        "44"
     ]
 }
