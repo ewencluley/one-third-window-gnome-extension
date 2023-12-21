@@ -2,6 +2,9 @@
 
 Position window like [Rectangle](https://rectangleapp.com/) in Gnome!
 
+## IMPORTANT
+This branch is for Gnome 44 and below and is no longer maintained. Gnome 45 introduced breaking changes, hence the split.
+
 ## Installation
 
 Clone this repository with git and do a `make install` to install it 
