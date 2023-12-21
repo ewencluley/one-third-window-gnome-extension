@@ -1,21 +1,11 @@
-'use strict';
+import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import Meta from 'gi://Meta';
+import Shell from 'gi://Shell';
 
-const {Meta, Shell} = imports.gi;
-
-const Main = imports.ui.main;
-const ExtensionUtils = imports.misc.extensionUtils;
-
-class Extension {
-
-    getActiveWindow() {
-        return global.workspace_manager
-        .get_active_workspace()
-        .list_windows()
-        .find(window => window.has_focus());
-    }
-
+export default class WrecktangleExtension extends Extension {
     enable() {
-        this._settings = ExtensionUtils.getSettings();
+        this._settings = this.getSettings();
         this.bindKey('left-third-shortcut', () => this.move(3, 0));
         this.bindKey('center-third-shortcut', () => this.move(3, 1));
         this.bindKey('right-third-shortcut', () => this.move(3, 2));
@@ -35,9 +25,17 @@ class Extension {
         this.unbindKey('right-half-shortcut');
         this.unbindKey('left-twothirds-shortcut');
         this.unbindKey('right-twothirds-shortcut');
+        this._settings = null;
     }
 
-    move(division, position, widthMultiplier = 1) {
+    getActiveWindow() {
+        return global.workspace_manager
+            .get_active_workspace()
+            .list_windows()
+            .find(window => window.has_focus());
+    }
+
+     move(division, position, widthMultiplier = 1) {
         if (position > division) {
             return;
         }
@@ -46,10 +44,8 @@ class Extension {
         const workarea = this.getWorkAreaForMonitor(monitor);
         const width = workarea.width * (widthMultiplier / division);
         const height = workarea.height;
-        const x = position * (workarea.width / division);
+        const x = (position * (workarea.width / division)) + workarea.x;
         const y = workarea.y;
-
-        console.log("x:", x, "width:", width, "pos:", position, "division:", division, "widthMultiplier:", widthMultiplier)
         this.moveWindow(activeWindow, {
             x: x,
             y: y,
@@ -92,11 +88,4 @@ class Extension {
     unbindKey(key) {
         Main.wm.removeKeybinding(key);
     }
-}
-
-/**
- *
- */
-function init() {
-    return new Extension();
 }

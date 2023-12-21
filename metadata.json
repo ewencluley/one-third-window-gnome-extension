@@ -1,18 +1,10 @@
 {
-    "name": "Wrecktangle",
-    "uuid": "wrecktangle@ewencluley.com",
-    "description": "Rectangles window manager clone for Gnome",
-    "url": "https://github.com/ewencluley/wrecktangle",
-    "settings-schema": "org.gnome.shell.extensions.wrecktangle",
-    "version": 1,
-    "shell-version": [
-        "3.34",
-        "3.36",
-        "3.38",
-        "40",
-        "41",
-        "42",
-        "43",
-        "44"
-    ]
+  "name": "Wrecktangle",
+  "uuid": "wrecktangle@ewencluley.com",
+  "description": "Rectangles window manager clone for Gnome",
+  "url": "https://github.com/ewencluley/wrecktangle",
+  "settings-schema": "org.gnome.shell.extensions.wrecktangle",
+  "shell-version": [
+    "45"
+  ]
 }
